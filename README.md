@@ -9,6 +9,6 @@ Installation:
   - move created war to tomcat directory
   - start tomcat
   
-go to http://localhost:8080/resources/myresource on a browser to call server synchronously, page will load in 20 seconds.
+go to [http://localhost:8080/resources/myresource](http://localhost:8080/resources/myresource) on a browser to call server synchronously, page will load in 20 seconds.
 
 To test asynchronous calls and queue management you will need to create a client side app.
