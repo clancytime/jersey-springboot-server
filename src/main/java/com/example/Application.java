@@ -3,9 +3,7 @@ package com.example;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.core.task.TaskExecutor;
 
 /**
  * Created by ssolnosky on 6/23/2016.
