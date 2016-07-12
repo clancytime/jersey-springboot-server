@@ -5,6 +5,7 @@ import org.springframework.core.task.TaskExecutor;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
@@ -26,24 +27,13 @@ public class MyResource {
     @Autowired
     private TaskExecutor taskExecutor;
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public void getIt(@Suspended final AsyncResponse asyncResponse) {
-        taskExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                String result = veryExpensiveOperation();
-                asyncResponse.resume(result);
-            }
+    @Autowired
+    private AsyncProcessor asyncProcessor;
 
-            private String veryExpensiveOperation() {
-                try {
-                    Thread.sleep(20000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return "Got it!";
-            }
-        });
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public void getIt(@PathParam("id") final String id, @Suspended final AsyncResponse asyncResponse) {
+        taskExecutor.execute(asyncProcessor.schedule(asyncResponse, id));
     }
 }
